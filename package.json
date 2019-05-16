@@ -27,7 +27,7 @@
     "help": "./node_modules/.bin/nx help",
     "build:api": "ng build api",
     "start:api": "node ./dist/apps/api/main",
-    "serve:api": "ng build api && node ./dist/apps/api/main"
+    "serve:api": "ng build api && cp ./apps/api/.env ./dist/apps/api && node ./dist/apps/api/main"
   },
   "private": true,
   "dependencies": {
