@@ -11,9 +11,11 @@ const dbUri = process.env["DB_URI"];
 const app = new Koa();
 
 // подключаем главные маршрутизаторы
-app.use(usersRoutes.routes);
+app.use(indexRoutes.routes);
 
 // подключаем маршрутизаторы users
+app.use(usersRoutes.routes);
+
 const application = app.callback();
 
 export default application;
