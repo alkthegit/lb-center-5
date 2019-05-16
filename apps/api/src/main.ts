@@ -1,7 +1,7 @@
 import { Server } from 'http';
-import app from './app/app';
+import application from './app/app';
 
-const server = new Server(app);
+const server = new Server(application);
 
 server.listen(3000, "localhost", () => {
     const address = server.address();

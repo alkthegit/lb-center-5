@@ -12,6 +12,6 @@ app.use(usersRoutes.routes);
 
 
 // подключаем маршрутизаторы users
-const appCallback = app.callback();
+const application = app.callback();
 
-export default appCallback;
+export default application;
