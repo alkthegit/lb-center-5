@@ -18,4 +18,5 @@ app.use(usersRoutes.routes);
 
 const application = app.callback();
 
+// экспортируем главный callback приложения для http-сервера Node.js
 export default application;
