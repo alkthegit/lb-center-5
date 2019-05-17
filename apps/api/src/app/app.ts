@@ -18,7 +18,6 @@ app.use(async (ctx, next) => {
 
 app.on('error', (err, ctx: Koa.Context) => {
     console.log(err);
-    ctx.body = err;
 });
 
 // подключаем главные маршрутизаторы
