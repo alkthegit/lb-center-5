@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc/apps/api",
-    "types": ["node"]
+    "types": ["node"],
+    "target": "es6"
   },
   "exclude": ["**/*.spec.ts"],
   "include": ["**/*.ts"]

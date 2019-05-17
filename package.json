@@ -26,12 +26,14 @@
     "dep-graph": "./node_modules/.bin/nx dep-graph",
     "help": "./node_modules/.bin/nx help",
     "start:api": "node ./dist/apps/api/main",
-    "serve:api": "ng build api --prod && node ./dist/apps/api/main"
+    "serve:api": "ng build api --prod --progress && node ./dist/apps/api/main"
   },
   "private": true,
   "dependencies": {
     "koa": "^2.7.0",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "pg": "^7.11.0",
+    "sequelize": "^5.8.6"
   },
   "devDependencies": {
     "@angular/cli": "7.3.1",

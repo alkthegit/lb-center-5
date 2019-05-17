@@ -1,14 +1,25 @@
 import * as Koa from 'koa';
 import * as indexRoutes from './routes/index';
 import * as usersRoutes from './routes/users';
-import * as dotenv from 'dotenv';
-import * as path from 'path';
-
-const dotEnvConfigPath = path.resolve(__dirname, ".env");
-dotenv.config({ path: dotEnvConfigPath })
-const dbUri = process.env["DB_URI"];
 
 const app = new Koa();
+
+// обработчик ошибок
+app.use(async (ctx, next) => {
+    try {
+        await next();
+    }
+    catch (err) {
+        ctx.status = err.status || 500;
+        ctx.body = err.message;
+        ctx.app.emit('error', err, ctx);
+    }
+});
+
+app.on('error', (err, ctx: Koa.Context) => {
+    console.log(err);
+    ctx.body = err;
+});
 
 // подключаем главные маршрутизаторы
 app.use(indexRoutes.routes);
