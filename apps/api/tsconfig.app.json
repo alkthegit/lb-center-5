@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc/apps/api",
     "types": ["node"],
-    "target": "es6"
+    "module": "commonjs"
   },
   "exclude": ["**/*.spec.ts"],
   "include": ["**/*.ts"]
