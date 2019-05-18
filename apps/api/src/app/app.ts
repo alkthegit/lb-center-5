@@ -1,7 +1,8 @@
 import * as Koa from 'koa';
 import * as indexRoutes from './routes/index';
 import * as usersRoutes from './routes/users';
-import { ServerResponse } from './middleware/users';
+import * as authRoutes from './routes/auth';
+import { ServerResponse } from './middleware/auth';
 
 const app = new Koa();
 
@@ -31,6 +32,9 @@ app.use(indexRoutes.routes);
 
 // подключаем маршрутизаторы users
 app.use(usersRoutes.routes);
+
+// подключаем маршрутизаторы users
+app.use(authRoutes.routes);
 
 const application = app.callback();
 

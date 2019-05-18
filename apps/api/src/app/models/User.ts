@@ -10,7 +10,7 @@ const userSchema = {
         autoIncrement: true
     },
     username: {
-        type: DataTypes.CHAR(50),
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     hash: {
