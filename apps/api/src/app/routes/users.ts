@@ -1,19 +1,26 @@
 import * as Router from 'koa-router';
-import { getAllUsers } from '../middleware/users';
+import { getAllUsers, signupUser } from '../middleware/users';
+import { ServerResponse } from '../middleware/users';
+import * as koaBody from 'koa-body';
+
 
 const router = new Router();
 
-// INDEX route
-router.get('/users', getAllUsers, async (ctx) => {
-    const users = ctx.state.users;
+// USERS INDEX route
+router.get('/users', getAllUsers, async (ctx, next) => {
     ctx.body = {
-        data: users
+        data: ctx.state.users
     };
 });
 
-// CREATE route
-router.post('/users', async (ctx) => {
+// USES CREATE route
+router.post('/users', koaBody(), signupUser, async (ctx, next) => {
+    // если ранее произошла ошибка, она попадет в единый обработчик при помои ctx.throw
+    const serverResponse: ServerResponse = {
+        data: ctx.state.userData
+    };
 
+    ctx.response.body = serverResponse;
 });
 
 const routes = router.routes();

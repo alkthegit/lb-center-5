@@ -1,6 +1,7 @@
 import * as Koa from 'koa';
 import * as indexRoutes from './routes/index';
 import * as usersRoutes from './routes/users';
+import { ServerResponse } from './middleware/users';
 
 const app = new Koa();
 
@@ -10,8 +11,13 @@ app.use(async (ctx, next) => {
         await next();
     }
     catch (err) {
+        const serverResponse: ServerResponse = {
+            error: err.message,
+            data: null
+        };
+
         ctx.status = err.status || 500;
-        ctx.body = err.message;
+        ctx.body = serverResponse;
         ctx.app.emit('error', err, ctx);
     }
 });

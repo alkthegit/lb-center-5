@@ -13,9 +13,6 @@ const userSchema = {
         type: DataTypes.CHAR(50),
         allowNull: false
     },
-    email: {
-        type: DataTypes.CHAR(100)
-    },
     hash: {
         type: DataTypes.CHAR(60),
         allowNull: false
