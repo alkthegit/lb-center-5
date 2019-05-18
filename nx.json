@@ -1,5 +1,5 @@
 {
-  "npmScope": "project51",
+  "npmScope": "center-5",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
