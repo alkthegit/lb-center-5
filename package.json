@@ -30,7 +30,7 @@
     "serve:api": "ng build api --prod --progress && node ./dist/apps/api/main",
     "build:frontend": "ng build frontend",
     "start:frontend": "node ./dist/apps/frontend/main.js",
-    "serve:frontend": "ng build api --prod --progress && node ./dist/apps/frontend/main.js"
+    "serve:frontend": "ng build frontend --prod --progress && http-server -p 8081 ./dist/apps/frontend"
   },
   "private": true,
   "dependencies": {
