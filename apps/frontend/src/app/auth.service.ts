@@ -18,7 +18,6 @@ export class AuthService {
     private router: Router
   ) {
     this.isAuthenticated = new Subject();
-    console.log(`subject created`);
   }
 
   signin(username, password) {

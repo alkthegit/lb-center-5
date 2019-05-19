@@ -88,7 +88,6 @@ const verifyJwtToken = async (token: string): Promise<{}> => {
  */
 export const signup = async (ctx: Context, next) => {
     await User.sync();
-    console.log({ username: ctx.request.body });
 
     const userData: UserData = {};
     const { username, password } = ctx.request.body;
