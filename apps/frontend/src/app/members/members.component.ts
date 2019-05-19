@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'center5-members',
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class MembersComponent implements OnInit {
   members;
 
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-
+    this.usersService.getMembers().subscribe(members => {
+      this.members = members;
+    });
   }
 
 }

@@ -200,6 +200,10 @@ export const signin = async (ctx: Context, next) => {
 export const checkAuthenticated = async (ctx: Context, next) => {
 
     const authHeader: string = ctx.request.headers['authentication'];
+    if(!authHeader){
+        ctx.throw(401, `Доступ запрещен`);
+    }
+    
     const token = authHeader.split(' ')[1];
 
     try {
