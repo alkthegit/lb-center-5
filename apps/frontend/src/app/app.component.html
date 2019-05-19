@@ -7,8 +7,15 @@
   <header>
     <nav>
       <a [routerLink]="['']">Home</a>
-      <a [routerLink]="['signup']">Регистрация</a>
-      <a [routerLink]="['signin']">Вход</a>
+      <a [routerLink]="['members']">Подписчики</a>
+
+      <ng-container *ngIf="!isAuthenticated; else elseTemplate">
+        <a [routerLink]="['signup']">Регистрация</a>
+        <a [routerLink]="['signin']">Вход</a>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <a (click)="onSignOut()">Выход</a>
+      </ng-template>
     </nav>
   </header>
 

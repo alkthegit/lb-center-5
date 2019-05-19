@@ -191,3 +191,26 @@ export const signin = async (ctx: Context, next) => {
 
     await next();
 }
+
+/**
+ * Проверяет аутентификационные данные, содержащиеся в запросе
+ *
+ *
+ */
+export const checkAuthenticated = async (ctx: Context, next) => {
+
+    const authHeader: string = ctx.request.headers['authentication'];
+    const token = authHeader.split(' ')[1];
+
+    try {
+        const payload = await verifyJwtToken(token);
+        if (!payload) {
+            ctx.throw(401, `Доступ запрещен, неизвестная ошибка`);
+        }
+    }
+    catch (err) {
+        ctx.throw(401, `Доступ запрещен`);
+    }
+
+    await next();
+}

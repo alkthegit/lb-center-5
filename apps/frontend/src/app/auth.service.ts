@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, catchError, switchMap, map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +10,16 @@ import { shareReplay } from 'rxjs/operators';
 export class AuthService {
   // токен текущей сессии
   private token: string;
-  private authenticated = false;
+  // private isAuthenticated = false;
+  private isAuthenticated: Subject<boolean>;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) {
+    this.isAuthenticated = new Subject();
+    console.log(`subject created`);
+  }
 
   signin(username, password) {
     return this.httpClient.post('http://localhost:3000/auth/signin',
@@ -18,32 +27,59 @@ export class AuthService {
         username,
         password
       }).pipe(
-        shareReplay()
-      ).subscribe(data => {
-        console.log(data)
-      });;
+        shareReplay(),
+        map((response: Response) => {
+          console.log(response);
+          if (response) {
+            if (response["error"]) {
+              console.log(`Ошибка: ${response["error"]}`);
+              return false;
+            }
+            else {
+              this.token = response["data"].authData.token;
+              this.isAuthenticated.next(true);
+              // this.router.navigate(['/']);
+              console.log(`Вход выполнен, пользователь: ${response["data"].username}`);
+              return true;
+            }
+          }
+        })
+      );
   };
 
   signup(username, password) {
+
     return this.httpClient.post('http://localhost:3000/auth/signup',
       {
         username,
         password
       }).pipe(
-        shareReplay()
-      ).subscribe(response => {
-        this.token = response["data"].authData.token;
-        console.log(`Вход выполнен: ${response["data"].authData.username}`);
-      });;
+        shareReplay(),
+        map((response: Response) => {
+          console.log(response);
+          if (response) {
+            if (response["error"]) {
+              console.log(`Ошибка: ${response["error"]}`);
+              return false;
+            }
+            else {
+              this.token = response["data"].authData.token;
+              this.isAuthenticated.next(true);
+              console.log(`Регистрация выполнена, пользователь: ${response["data"].username}`);
+              return true;
+            }
+          }
+        })
+      );
   };
 
   logout() {
     this.token = '';
-    this.authenticated = false;
+    this.isAuthenticated.next(false);
   }
 
-  isAuthenticated() {
-    return this.authenticated;
+  checkAuthenticated() {
+    return this.isAuthenticated;
   }
 
   getToken() {

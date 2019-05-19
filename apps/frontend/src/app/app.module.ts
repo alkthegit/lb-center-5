@@ -8,9 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MembersComponent } from './members/members.component';
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, AuthComponent, HomeComponent],
+  declarations: [AppComponent, PageNotFoundComponent, AuthComponent, HomeComponent, MembersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

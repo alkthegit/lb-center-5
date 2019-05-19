@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Data, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router, Params } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
@@ -15,6 +15,7 @@ export const enum AuthAction {
 export class AuthComponent implements OnInit {
   title: string;
   authAction: AuthAction;
+  returnUrl: string;
 
   constructor(
     private router: Router,
@@ -32,6 +33,10 @@ export class AuthComponent implements OnInit {
         this.title = 'Регистрация';
       }
     });
+
+    this.route.queryParams.subscribe((params: Params) => {
+      this.returnUrl = params["returnUrl"] || '';
+    })
   }
 
   onSubmit(form: NgForm) {
@@ -39,10 +44,18 @@ export class AuthComponent implements OnInit {
     const { username, password } = form.value;
 
     if (this.authAction === AuthAction.SignUp) {
-      this.authService.signup(username, password)
+      this.authService.signup(username, password);
+      this.router.navigate([this.returnUrl]);
+      console.log(this.returnUrl);
     }
     else if (this.authAction === AuthAction.SignIn) {
       this.authService.signin(username, password)
+        .subscribe((loggedIn: boolean) => {
+          if (loggedIn) {
+            this.router.navigate([this.returnUrl]);
+            // console.log(this.returnUrl);
+          }
+        });
     }
   }
 

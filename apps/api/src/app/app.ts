@@ -4,6 +4,7 @@ import * as indexRoutes from './routes/index';
 import * as usersRoutes from './routes/users';
 import * as authRoutes from './routes/auth';
 import { ServerResponse } from './middleware/auth';
+import { logger } from './middleware/logger';
 
 const app = new Koa();
 
@@ -29,8 +30,11 @@ app.on('error', (err, ctx: Koa.Context) => {
 });
 
 
-//
+// подключаем cors
 app.use(cors());
+
+// подключаем логи
+// app.use(logger);
 
 // подключаем главные маршрутизаторы
 app.use(indexRoutes.routes);
