@@ -18,6 +18,26 @@ git clone https://github.com/alkthegit/lb-center-5
 npm i
 ```
 
+### Переменный окружения
+
+Для нормальной работы бэкэнд-серверу необходимы следующие переменные окружения:
+
+```sh
+# строка подключения к серверу PostgreSQL
+DB_URI=<URI для подключения к СУБД PostgreSQL>
+
+# Секрет для генерации токенов
+JWT_SECRET=<произвольня строка символов, например>
+
+# Продолжительность действия токенов в секундах
+JWT_SECONDS_AGE=<число>
+
+# логи сервера
+SERVER_LOGGING=1|0
+```
+
+Данные переменные необходимо прописать в файле .env, который должен быть расположен в папке ./apps/api/src
+
 ## Сборка и запуск
 
 ### Backend (api)
@@ -42,13 +62,19 @@ npm run serve:api
 
 ### Frontend
 
+Запуск в отладочном режиме:
+
+```bash
+npm serve:frontend
+```
+
 Сборка:
 
 ```bash
 npm run build:frontend
 ```
 
-Запуск:
+Запуск собранного проекта:
 
 ```bash
 npm run start:frontend
@@ -59,3 +85,5 @@ npm run start:frontend
 ```bash
 npm run serve:frontend
 ```
+
+В браузере ввести адрес: http://localhost:8081
