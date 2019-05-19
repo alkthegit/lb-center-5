@@ -9,7 +9,6 @@ import { serverConfig } from './config';
 
 const app = new Koa();
 const isServerLoggingOn = serverConfig.isServerLoggingOn;
-console.log(isServerLoggingOn);
 
 // обработчик ошибок
 app.use(async (ctx, next) => {
