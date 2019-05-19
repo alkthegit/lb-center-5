@@ -5,8 +5,10 @@ import * as usersRoutes from './routes/users';
 import * as authRoutes from './routes/auth';
 import { ServerResponse } from './middleware/auth';
 import { logger } from './middleware/logger';
+import { serverConfig } from './config';
 
 const app = new Koa();
+const isServerLoggingOn = serverConfig.isServerLoggingOn;
 
 // обработчик ошибок
 app.use(async (ctx, next) => {
@@ -34,7 +36,9 @@ app.on('error', (err, ctx: Koa.Context) => {
 app.use(cors());
 
 // подключаем логи
-// app.use(logger);
+if (isServerLoggingOn) {
+    app.use(logger);
+}
 
 // подключаем главные маршрутизаторы
 app.use(indexRoutes.routes);

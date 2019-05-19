@@ -19,7 +19,7 @@ export class UsersStorageService {
 
     // формируем заголовок с токеном для запроса
     const headers = new HttpHeaders({
-      "authentication": `Bearer ${token}`
+      "Authorization": `Bearer ${token}`
     });
 
     // возвращаем observable выполнения запроса

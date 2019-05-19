@@ -9,6 +9,7 @@ import { Context } from 'koa';
  * @param next
  */
 export const getAllUsers = async (ctx: Context, next) => {
+
     await User.sync();
     const foundUsers = await User.findAll();
 

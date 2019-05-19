@@ -44,8 +44,13 @@ export class AuthComponent implements OnInit {
     const { username, password } = form.value;
 
     if (this.authAction === AuthAction.SignUp) {
-      this.authService.signup(username, password);
-      this.router.navigate([this.returnUrl]);
+      this.authService.signup(username, password)
+        .subscribe((loggedIn: boolean) => {
+          if (loggedIn) {
+            this.router.navigate([this.returnUrl]);
+            // console.log(this.returnUrl);
+          }
+        });
       console.log(this.returnUrl);
     }
     else if (this.authAction === AuthAction.SignIn) {

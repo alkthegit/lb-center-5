@@ -25,6 +25,8 @@ export interface ServerResponse {
     message?: string
 }
 
+// время жизни токена - если конфига нет, то по умолчанию ставим 4 часа
+const maxTokenAge = serverConfig.maxJWTSecondsAge || 4 * 60 * 60;
 /**
  * Порождает новый токен на основе переданного payload и секрета из переменной окружения
  * 
@@ -35,7 +37,7 @@ const generateJwtToken = async (payload): Promise<string> => {
     return new Promise((resolve, reject) => {
         jwt.sign(payload, serverConfig.jwtSecret,
             {
-                expiresIn: '4h'
+                expiresIn: maxTokenAge
             }, (err, newToken) => {
                 if (err) {
                     reject(err.message);
@@ -53,8 +55,10 @@ const generateJwtToken = async (payload): Promise<string> => {
  * @param token Проверяет токен на корректность
  */
 const verifyJwtToken = async (token: string): Promise<{}> => {
+    const maxTokenAgeMilliseconds = maxTokenAge * 1000;
     return new Promise((resolve, reject) => {
         jwt.verify(token, serverConfig.jwtSecret,
+            { maxAge: `${maxTokenAgeMilliseconds}` },
             (err, payload) => {
                 if (err) {
                     reject(err.message);
@@ -198,12 +202,11 @@ export const signin = async (ctx: Context, next) => {
  *
  */
 export const checkAuthenticated = async (ctx: Context, next) => {
-
-    const authHeader: string = ctx.request.headers['authentication'];
-    if(!authHeader){
-        ctx.throw(401, `Доступ запрещен`);
+    const authHeader = ctx.get('authorization');
+    if (!authHeader) {
+        ctx.throw(401, `Доступ запрещен, данные подтверждения пользователя не переданы`);
     }
-    
+
     const token = authHeader.split(' ')[1];
 
     try {
@@ -212,7 +215,7 @@ export const checkAuthenticated = async (ctx: Context, next) => {
             ctx.throw(401, `Доступ запрещен, неизвестная ошибка`);
         }
     }
-    catch (err) {
+    catch (_) {
         ctx.throw(401, `Доступ запрещен`);
     }
 
