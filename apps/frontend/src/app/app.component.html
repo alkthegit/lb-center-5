@@ -1,25 +1,28 @@
 <div class="site">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  </head>
   <header>
     <nav>
-      <a [routerLink]="['']">Home</a>
-      <a [routerLink]="['members']">Подписчики</a>
+      <div class="banner">
+        <a [routerLink]="['']">Домой</a>
+      </div>
 
-      <ng-container *ngIf="!isAuthenticated; else elseTemplate">
-        <a [routerLink]="['signup']">Регистрация</a>
-        <a [routerLink]="['signin']">Вход</a>
-      </ng-container>
-      <ng-template #elseTemplate>
-        <a (click)="onSignOut()">Выход</a>
-      </ng-template>
+      <div class="header-panel">
+        <a [routerLink]="['members']">Подписчики</a>
+        <div class="auth-panel">
+          <ng-container *ngIf="!isAuthenticated; else elseTemplate">
+            <a [routerLink]="['signup']">Регистрация</a>
+            <a [routerLink]="['signin']">Вход</a>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <a (click)="onSignOut()">Выход</a>
+          </ng-template>
+        </div>
+      </div>
     </nav>
   </header>
 
-  <router-outlet></router-outlet>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
 
   <footer></footer>
 </div>

@@ -1,0 +1,49 @@
+header {
+  height: 50px;
+  /* background-color: rgb(200, 244, 255); */
+  background-color: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  padding: 7px;
+  box-sizing: border-box;
+}
+
+header nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+header nav .banner {
+  font-size: 1.3em;
+  text-transform: uppercase;
+}
+
+header nav .header-panel {
+  margin-left: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+header nav .auth-panel a {
+  margin-left: 15px;
+}
+
+header a {
+  text-decoration: none;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  color: white;
+  opacity: 0.8;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+header a:hover {
+  opacity: 0.9;
+}

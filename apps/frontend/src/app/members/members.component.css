@@ -1,0 +1,30 @@
+h1 {
+  padding-top: 60px;
+  padding-left: 20px;
+}
+
+.list-item {
+  margin-top: 5px;
+}
+
+.list-item:first-of-type {
+  margin-top: 0;
+}
+
+ul {
+  margin: 15px;
+  list-style: none;
+}
+ul li {
+  border: 1px solid grey;
+  background-color: rgb(231, 255, 254);
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+  width: 500px;
+  border-radius: 5px;
+}
+
+ul li:hover {
+  background-color: rgb(167, 233, 231);
+}

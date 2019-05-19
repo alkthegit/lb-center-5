@@ -1,9 +1,15 @@
-<h1>{{ title }}</h1>
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
-  <label for="username">Имя пользователя</label>
-  <input type="text" name="username" id="username" required ngModel />
+<div class="form">
+  <h1>{{ title }}</h1>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-group">
+      <label for="username">Имя пользователя</label>
+      <input type="text" name="username" id="username" required ngModel />
+    </div>
 
-  <label for="password">Пароль</label>
-  <input type="password" name="password" id="password" required ngModel />
-  <button type="submit">Отправить</button>
-</form>
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input type="password" name="password" id="password" required ngModel />
+    </div>
+    <button type="submit">Отправить</button>
+  </form>
+</div>
