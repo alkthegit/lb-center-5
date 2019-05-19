@@ -1,4 +1,5 @@
 import * as Koa from 'koa';
+import * as cors from '@koa/cors';
 import * as indexRoutes from './routes/index';
 import * as usersRoutes from './routes/users';
 import * as authRoutes from './routes/auth';
@@ -26,6 +27,10 @@ app.use(async (ctx, next) => {
 app.on('error', (err, ctx: Koa.Context) => {
     console.log(err);
 });
+
+
+//
+app.use(cors());
 
 // подключаем главные маршрутизаторы
 app.use(indexRoutes.routes);

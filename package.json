@@ -30,7 +30,8 @@
     "serve:api": "ng build api --prod --progress && node ./dist/apps/api/main",
     "build:frontend": "ng build frontend",
     "start:frontend": "node ./dist/apps/frontend/main.js",
-    "serve:frontend": "ng build frontend --prod --progress && http-server -p 8081 ./dist/apps/frontend"
+    "serve:frontend": "ng build frontend --prod --progress && http-server -p 8081 ./dist/apps/frontend",
+    "serve:frontend:prod": "ng build --prod --aot frontend && http-server -p 8081 ./dist/apps/frontend"
   },
   "private": true,
   "dependencies": {
@@ -42,16 +43,17 @@
     "@angular/platform-browser": "^7.0.0",
     "@angular/platform-browser-dynamic": "^7.0.0",
     "@angular/router": "^7.0.0",
-    "core-js": "^2.5.4",
-    "rxjs": "6.3.3",
-    "zone.js": "^0.8.26",
+    "@koa/cors": "^3.0.0",
     "bcryptjs": "^2.4.3",
+    "core-js": "^2.5.4",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-router": "^7.4.0",
     "pg": "^7.11.0",
-    "sequelize": "^5.8.6"
+    "rxjs": "6.3.3",
+    "sequelize": "^5.8.6",
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "karma": "~3.0.0",

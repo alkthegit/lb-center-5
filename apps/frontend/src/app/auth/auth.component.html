@@ -1,2 +1,10 @@
-<h1>Authorization</h1>
-<p>{{ authAction.action }}</p>
+<h1>{{ title }}</h1>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <label for="username">Имя пользователя</label>
+  <input type="text" name="username" id="username" required ngModel />
+
+  <label for="password">Пароль</label>
+  <input type="password" name="password" id="password" required ngModel />
+  <button type="submit">Отправить</button>
+</form>
+<button (click)="onCancel()">Отмена</button>

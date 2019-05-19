@@ -5,8 +5,8 @@ import { Context } from 'koa';
  * Получает список всех пользоывателей в базе.
  * Устанавливает полученный список в текущем контексте запроса - ctx.state.users
  * 
- * @param ctx - параметр движка Koa
- * @param next - параметр движка Koa
+ * @param ctx
+ * @param next
  */
 export const getAllUsers = async (ctx: Context, next) => {
     await User.sync();
